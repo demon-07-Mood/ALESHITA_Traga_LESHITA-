@@ -32,7 +32,7 @@ if st.session_state.nivel == -1:
 
 # --- NIVEL 0: Inicio ---
 elif st.session_state.nivel == 0:
-    st.title(".Responde Bien LINDURA... 🤫")
+    st.title("Responde Bien LINDURA... 🤫")
     if st.button("Comenzar a Kchar,,, digo Jugar😏"):
         st.session_state.nivel = 1
         st.rerun()
@@ -53,36 +53,38 @@ elif st.session_state.nivel == 1:
 
 # --- NIVEL 2: La Puerta de Piedra ---
 elif st.session_state.nivel == 2:
-    st.markdown("### Nivel 2: La Puerta de Piedra 🪨")
+    st.markdown("### Nivel 2: Muestra de Cariño 🥰")
+    st.write("¿Cual es el apodo que me pusiste, o bueno con q nombre me llamas?")
     r1 = st.text_input("Contraseña:").lower().strip()
-    if r1 == "respuesta1": # EDITA TU RESPUESTA AQUÍ
-        st.success("¡La puerta se abre!")
-        if st.button("Continuar"):
+    if r1 == "leandro": 
+        st.success("¡MUY BIEN!, TE KIERO AMIGUITA GUAPA")
+        if st.button("Seguir"):
             st.session_state.nivel = 3
             st.rerun()
     elif r1 != "":
-        st.warning("Intenta de nuevo.")
+        st.warning("DEJAS MAL OH, TAKE NI PA ESO SIRVES, VUELVE A RESPONDER!!")
 
-# --- NIVEL 3: Bóveda Final ---
+# --- NIVEL 3: ---
 elif st.session_state.nivel == 3:
-    st.markdown("### Nivel 3: La Bóveda 🔐")
+    st.markdown("### Nivel 3: La Pregunta Final")
+    st.write("¿Como se llama la chica mas Guapa del Mundo?")
     r2 = st.text_input("Última contraseña:").lower().strip()
-    if r2 == "respuesta2": # EDITA TU RESPUESTA AQUÍ
+    if r2 == "alessita":
         st.session_state.nivel = 4
         st.rerun()
     elif r2 != "":
-        st.warning("Contraseña incorrecta.")
+        st.warning("Responde bien GUAPA 😘")
 
 # --- NIVEL 4: GIF Final ---
 elif st.session_state.nivel == 4:
     st.balloons()
-    st.title("¡Lo lograste! 🎉")
-    st.write("Gracias por jugar.")
+    st.title("¡Muy bien amiguita, espero te hayas divertido, Quiero q sepas q te kiero mucho, grcs por llegar a mi vida, y espero q nunca te alejes de mi o me olvides, yo nunca lo hare TE AMOOO PRECIOSURAAA! 🎉")
+    st.write("Gracias por jugar, Muack 😘")
     
     # Mostrar el GIF subido al repo
     st.image("kitty.gif")
     
-    if st.button("Reiniciar"):
+    if st.button("Volver a Jugar 😏"):
         st.session_state.nivel = -1
         st.rerun()
         
