@@ -1,10 +1,10 @@
 
 import streamlit as st
 
-# Configuración móvil (sin barras laterales ni distracciones)
-st.set_page_config(page_title="Para Aleshita", page_icon="✨", layout="centered")
+# Configuración básica
+st.set_page_config(page_title="Para Aleshita", layout="centered")
 
-# Ocultar menú de Streamlit para que parezca una app nativa
+# Ocultar menús y footer de Streamlit
 st.markdown("""
     <style>
     #MainMenu {visibility: hidden;}
@@ -13,96 +13,79 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# Inicializar sistema de niveles
+# Inicializar estados
 if 'nivel' not in st.session_state:
-    st.session_state.nivel = 0
+    st.session_state.nivel = -1
 
-# NIVEL 0: Pantalla de inicio (Obligatorio para que el celular permita el autoplay de audio)
-if st.session_state.nivel == 0:
+# --- NIVEL -1: Acceso Restringido ---
+if st.session_state.nivel == -1:
+    st.title("🔐 Acceso Restringido")
+    palabra = st.text_input("Ingresa la palabra secreta:").lower().strip()
+    
+    if palabra == "tupalabra": # EDITA TU PALABRA AQUÍ
+        st.success("Acceso concedido.")
+        if st.button("Entrar a la aventura"):
+            st.session_state.nivel = 0
+            st.rerun()
+    elif palabra != "":
+        st.error("Palabra incorrecta.")
+
+# --- NIVEL 0: Inicio ---
+elif st.session_state.nivel == 0:
     st.title("Una aventura secreta... 🤫")
-    st.write("Sube el volumen de tu celular y presiona el botón cuando estés lista.")
     if st.button("Comenzar Aventura"):
         st.session_state.nivel = 1
         st.rerun()
 
-# NIVEL 1: El Bosque (Inicio del suspenso)
+# --- NIVEL 1: El Bosque ---
 elif st.session_state.nivel == 1:
-    # Reproduce la música de suspenso
-    st.audio("suspenso.mp3", format="audio/mp3", autoplay=True, loop=True)
+    audio_bytes = open("suspenso.mp3", "rb").read()
+    st.audio(audio_bytes, format="audio/mp3", autoplay=True, loop=True)
     
     st.markdown("### Nivel 1: El Bosque Oscuro 🌲")
-    st.write("Caminas por un bosque oscuro y el sendero se divide. ¿Qué camino tomas?")
+    st.write("Caminas por un bosque oscuro. ¿Qué camino tomas?")
     
     if st.button("El sendero con huellas"):
         st.error("Caíste en una trampa de barro. ¡Regresa!")
-    
     if st.button("El sendero cubierto de neblina"):
         st.session_state.nivel = 2
         st.rerun()
 
-# NIVEL 2: El Candado del Tiempo
+# --- NIVEL 2: La Puerta de Piedra ---
 elif st.session_state.nivel == 2:
-    st.audio("suspenso.mp3", format="audio/mp3", autoplay=True, loop=True)
-    
     st.markdown("### Nivel 2: La Puerta de Piedra 🪨")
-    st.write("Lograste pasar. Ahora una puerta bloquea tu paso con la siguiente pregunta:")
-    
-    # .strip().lower() evita errores si ella pone mayúsculas o espacios al final
-    r1 = st.text_input("¿En qué mes empezamos a hablar? (escríbelo en minúsculas)").strip().lower()
-    
-    if r1 == "octubre": # REEMPLAZA "octubre" POR LA RESPUESTA REAL
+    r1 = st.text_input("Contraseña:").lower().strip()
+    if r1 == "respuesta1": # EDITA TU RESPUESTA AQUÍ
         st.success("¡La puerta se abre!")
-        if st.button("Avanzar a la bóveda"):
+        if st.button("Continuar"):
             st.session_state.nivel = 3
             st.rerun()
     elif r1 != "":
-        st.warning("La puerta no se mueve. Intenta de nuevo.")
+        st.warning("Intenta de nuevo.")
 
-# NIVEL 3: La Bóveda Final
+# --- NIVEL 3: Bóveda Final ---
 elif st.session_state.nivel == 3:
-    st.audio("suspenso.mp3", format="audio/mp3", autoplay=True, loop=True)
-    
-    st.markdown("### Nivel 3: La Bóveda de Seguridad 🔐")
-    st.write("Estás frente a la bóveda final. Necesitas la contraseña clave.")
-    
-    r2 = st.text_input("¿Cuál es el apodo por el que te llamo?").strip().lower()
-    
-    if r2 == "aleshita":
+    st.markdown("### Nivel 3: La Bóveda 🔐")
+    r2 = st.text_input("Última contraseña:").lower().strip()
+    if r2 == "respuesta2": # EDITA TU RESPUESTA AQUÍ
         st.session_state.nivel = 4
         st.rerun()
     elif r2 != "":
         st.warning("Contraseña incorrecta.")
 
-# NIVEL 4: Recompensa y Mensaje Final
+# --- NIVEL 4: GIF Final ---
 elif st.session_state.nivel == 4:
     st.balloons()
-    
     st.title("¡Lo lograste! 🎉")
-    st.write("Superaste todos los obstáculos.")
-    st.markdown("Quería hacer algo único para ti. Te tengo muchísimo cariño y valoro todo lo que compartimos. ¡Espero que este pequeño juego te haya sacado una sonrisa!")
-    st.write("💖")
+    st.write("Gracias por jugar.")
     
-    # Botón opcional para reiniciar
-    if st.button("Volver a jugar"):
-        st.session_state.nivel = 0
+    # Mostrar el GIF subido al repo
+    st.image("kitty.gif")
+    
+    if st.button("Reiniciar"):
+        st.session_state.nivel = -1
         st.rerun()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
 
