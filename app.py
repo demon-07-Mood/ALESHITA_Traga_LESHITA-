@@ -22,18 +22,18 @@ if st.session_state.nivel == -1:
     st.title("🔐 Acceso Restringido")
     palabra = st.text_input("Ingresa la palabra secreta:").lower().strip()
     
-    if palabra == "tupalabra": # EDITA TU PALABRA AQUÍ
-        st.success("Acceso concedido.")
-        if st.button("Entrar a la aventura"):
+    if palabra == "Soy Alessia y me gusta la Pinga":
+        st.success("Muy bien Cachorrita.")
+        if st.button("Jugar"):
             st.session_state.nivel = 0
             st.rerun()
     elif palabra != "":
-        st.error("Palabra incorrecta.")
+        st.error("Rompe Mrda, escribe la palabra correcta!.")
 
 # --- NIVEL 0: Inicio ---
 elif st.session_state.nivel == 0:
-    st.title("Una aventura secreta... 🤫")
-    if st.button("Comenzar Aventura"):
+    st.title(".Responde Bien LINDURA... 🤫")
+    if st.button("Comenzar a Kchar,,, digo Jugar😏"):
         st.session_state.nivel = 1
         st.rerun()
 
@@ -42,12 +42,12 @@ elif st.session_state.nivel == 1:
     audio_bytes = open("suspenso.mp3", "rb").read()
     st.audio(audio_bytes, format="audio/mp3", autoplay=True, loop=True)
     
-    st.markdown("### Nivel 1: El Bosque Oscuro 🌲")
-    st.write("Caminas por un bosque oscuro. ¿Qué camino tomas?")
+    st.markdown("### Nivel 1: El inicio de una linda amistad 🥰")
+    st.write("Hubo una vez, donde dos personas sin buscarse se encontraron y demostraron que funcionaron sin amarse. ¿En q año nos conocimos?")
     
-    if st.button("El sendero con huellas"):
-        st.error("Caíste en una trampa de barro. ¡Regresa!")
-    if st.button("El sendero cubierto de neblina"):
+    if st.button("2024"):
+        st.error("Dejas mal Mrda, pero si fuera tu ex, altoke no Kcheraaa 🙄")
+    if st.button("2025"):
         st.session_state.nivel = 2
         st.rerun()
 
