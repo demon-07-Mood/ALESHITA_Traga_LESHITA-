@@ -12,19 +12,16 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# 1. LOGICA DE AUDIO PERSISTENTE
+# --- 1. LOGICA DE AUDIO (Solo se ejecuta una vez) ---
 if 'audio_iniciado' not in st.session_state:
     st.session_state.audio_iniciado = False
 
-if not st.session_state.audio_iniciado:
-    try:
-        audio_bytes = open("suspenso.mp3", "rb").read()
-        st.audio(audio_bytes, format="audio/mp3", autoplay=True, loop=True)
-        st.session_state.audio_iniciado = True
-    except:
-        st.write("*(Audio no disponible)*")
+# La música NO se toca si ya está iniciada
+if st.session_state.audio_iniciado:
+    audio_bytes = open("suspenso.mp3", "rb").read()
+    st.audio(audio_bytes, format="audio/mp3", autoplay=True, loop=True)
 
-# Inicializar estados
+# Inicializar niveles
 if 'nivel' not in st.session_state:
     st.session_state.nivel = -1
 
@@ -36,6 +33,7 @@ if st.session_state.nivel == -1:
     if palabra == "alessia_kachera":
         st.success("Muy bien Cachorrita.")
         if st.button("Jugar"):
+            st.session_state.audio_iniciado = True # Activa la música al entrar
             st.session_state.nivel = 0
             st.rerun()
     elif palabra != "":
@@ -88,18 +86,13 @@ elif st.session_state.nivel == 4:
     st.balloons()
     st.title("¡Muy bien amiguita, espero te hayas divertido, Quiero q sepas q te kiero mucho, grcs por llegar a mi vida, y espero q nunca te alejes de mi o me olvides, yo nunca lo hare TE AMOOO PRECIOSURAAA! 🎉")
     st.write("Gracias por jugar, Muack 😘")
-    
-    # Mostrar el GIF subido al repo
     st.image("kitty.gif")
     
     if st.button("Volver a Jugar 😏"):
+        st.session_state.audio_iniciado = False # Apaga música al reiniciar
         st.session_state.nivel = -1
         st.rerun()
-
-
-
-
-
+        
 
 
 
