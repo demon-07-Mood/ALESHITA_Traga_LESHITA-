@@ -22,7 +22,7 @@ if st.session_state.nivel == -1:
     st.title("🔐 Acceso Restringido")
     palabra = st.text_input("Ingresa la palabra secreta:").lower().strip()
     
-    if palabra == "Soy Alessia y me gusta la Pinga":
+    if palabra == "Alessia_Kachera":
         st.success("Muy bien Cachorrita.")
         if st.button("Jugar"):
             st.session_state.nivel = 0
