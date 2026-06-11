@@ -1,4 +1,3 @@
-
 import streamlit as st
 
 # Configuración básica
@@ -12,6 +11,18 @@ st.markdown("""
     header {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
+
+# 1. LOGICA DE AUDIO PERSISTENTE
+if 'audio_iniciado' not in st.session_state:
+    st.session_state.audio_iniciado = False
+
+if not st.session_state.audio_iniciado:
+    try:
+        audio_bytes = open("suspenso.mp3", "rb").read()
+        st.audio(audio_bytes, format="audio/mp3", autoplay=True, loop=True)
+        st.session_state.audio_iniciado = True
+    except:
+        st.write("*(Audio no disponible)*")
 
 # Inicializar estados
 if 'nivel' not in st.session_state:
@@ -39,9 +50,6 @@ elif st.session_state.nivel == 0:
 
 # --- NIVEL 1: El Bosque ---
 elif st.session_state.nivel == 1:
-    audio_bytes = open("suspenso.mp3", "rb").read()
-    st.audio(audio_bytes, format="audio/mp3", autoplay=True, loop=True)
-    
     st.markdown("### Nivel 1: El inicio de una linda amistad 🥰")
     st.write("Hubo una vez, donde dos personas sin buscarse se encontraron y demostraron que funcionaron sin amarse. ¿En q año nos conocimos?")
     
@@ -87,26 +95,6 @@ elif st.session_state.nivel == 4:
     if st.button("Volver a Jugar 😏"):
         st.session_state.nivel = -1
         st.rerun()
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
