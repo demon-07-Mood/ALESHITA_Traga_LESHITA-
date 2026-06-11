@@ -23,11 +23,11 @@ elif st.session_state.etapa == 2:
     st.markdown("### La Puerta Principal")
     st.write("Un guardia te detiene. Para pasar y leer tu primer mensaje, debes responder:")
     
-    respuesta = st.text_input("¿En qué mes nos conocimos?").lower()
+    respuesta = st.text_input("¿En qué año nos conocimos?").lower()
     
-    if respuesta == "octubre": # Reemplaza por la respuesta real
-        st.success("¡Correcto! Eres increíble.")
-        st.write("✨ **Mensaje desbloqueado:** *Siempre recuerdo ese día, fue de los mejores...*")
+    if respuesta == "2025": # Reemplaza por la respuesta real
+        st.success("¡VAAA, ME DEJAS BIEN CACHORRA!.")
+        st.write("✨ **Mensaje desbloqueado:** *Gracias, por llegar a mi vida, me ayudaste mucho y me hiciste pasar buenos momentos Aleshita*")
         st.balloons()
         
         if st.button("Continuar la aventura"):
