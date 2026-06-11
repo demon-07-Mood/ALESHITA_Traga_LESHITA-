@@ -27,7 +27,8 @@ if st.session_state.nivel == 0:
 # NIVEL 1: El Bosque (Inicio del suspenso)
 elif st.session_state.nivel == 1:
     # Reproduce la música de suspenso
-    st.audio("suspenso.mp3", format="audio/mp3", autoplay=True, loop=True)
+    audio_bytes = open("suspenso.mp3", "rb").read()
+st.audio(audio_bytes, format="audio/mp3", autoplay=True, loop=True)
     
     st.markdown("### Nivel 1: El Bosque Oscuro 🌲")
     st.write("Caminas por un bosque oscuro y el sendero se divide. ¿Qué camino tomas?")
